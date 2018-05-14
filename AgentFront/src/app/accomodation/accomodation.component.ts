@@ -18,7 +18,10 @@ export class AccomodationComponent implements OnInit {
   public id;
   public accomodation;
   public terms;
+-date="Wed May 16 11:00 2018 +0100"
+-date="Wed May 16 11:00 2018 +0100"
 
+-date="Wed May 16 11:00 2018 +0100"
   constructor(private fb: FormBuilder,
               private snackBar: MatSnackBar,
               private http: HttpClient,
