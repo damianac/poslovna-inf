@@ -1,0 +1,37 @@
+<mat-card class="dashboard-card mat-elevation-z6">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>{{ term.accomodation.name | uppercase }}</mat-card-title>
+      <mat-card-subtitle>{{ term.accomodation.category }}</mat-card-subtitle>
+      <mat-card-subtitle>
+        {{ term.startDate | date }} to {{ term.endDate | date }} starting at {{ term.price }}<span>&#36;</span>
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        {{ term.accomodation.country }}, {{ term.accomodation.city }}, {{ term.accomodation.address}}
+      </mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+  <slideshow [height]="'250px'" [backgroundSize]="'cover'" [backgroundPosition]="'center center'" [arrowSize]="'10px'" [showDots]="true"
+    [autoPlay]="true" [backgroundRepeat]="false" [showArrows]="true" [imageUrls]="term.accomodation.images" [lazyLoad]="term.accomodation.images?.length > 1"
+    [autoPlayWaitForLazyLoad]="true">
+  </slideshow>
+  <mat-card-content fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around center" fxLayoutGap="2em">
+    <mat-list fxFlexAlign="start" fxFlexAlign.lt-md="center">
+      <h3 mat-subheader>Services</h3>
+      <mat-list-item *ngFor="let service of term.accomodation.additionalService">
+        <mat-icon mat-list-icon>room_service</mat-icon>
+        <p matLine>{{ service }}</p>
+      </mat-list-item>
+    </mat-list>
+    <mat-list fxFlex fxFlexAlign="start" class="mat-card-description">
+      <h3 mat-subheader>Description</h3>
+      <mat-list-item>
+        <p>{{ term.accomodation.description }}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions *ngIf="isAuthenticated">
+    <button class="reserve" mat-raised-button color="accent" (click)="reserve.emit(term.id)">
+      <mat-icon>flight</mat-icon> Reserve</button>
+  </mat-card-actions>
+</mat-card>

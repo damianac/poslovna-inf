@@ -1,0 +1,109 @@
+<div class="container">
+  <h1 class="mat-h1">Homepage</h1>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Search
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form
+        fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="1em"
+        fxLayoutAlign="space-around center" fxLayoutAlign.sm="space-evenly center"
+        [formGroup]="searchForm"
+        (ngSubmit)="onSumbit()"
+        style="margin-bottom: 3em">
+
+        <mat-form-field>
+          <input matInput required placeholder="City" formControlName="city">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput required placeholder="Country" formControlName="country">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput required placeholder="Number of people" type="number" class="example-right-align" formControlName="capacity">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput required [matDatepicker]="pickerFrom" placeholder="From" formControlName="startDate">
+            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFrom></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput required [matDatepicker]="pickerTo" placeholder="To" formControlName="endDate">
+            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+            <mat-datepicker #pickerTo></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Sort by" formControlName="sortBy">
+              <mat-option *ngFor="let s of sortBy" [value]="s.value">
+                {{ s.name }}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Order" formControlName="orderBy">
+              <mat-option *ngFor="let o of order" [value]="o.value">
+                {{ o.name }}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!searchForm.valid">
+            <mat-icon>search</mat-icon> Search
+        </button>
+      </form>
+
+      <mat-expansion-panel hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-description>
+            Advanced search
+            <mat-icon>youtube_searched_for</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div
+          fxLayout="row" fxLayout.lt-sm="column"
+          fxLayoutAlign="space-around start" fxLayoutAlign.lt-sm="space-around center"
+          fxLayoutGap.lt-sm="2em" *ngIf="filter">
+          <mat-selection-list #services dense>
+              <h3 mat-subheader>Additional services</h3>
+              <mat-list-option *ngFor="let service of filter.services" [value]="service.id">
+                {{ service.name }}
+              </mat-list-option>
+          </mat-selection-list>
+
+          <mat-selection-list dense #types>
+              <h3 mat-subheader>Accomodation types</h3>
+              <mat-list-option *ngFor="let type of filter.types" [value]="type.id">
+                {{ type.type }}
+              </mat-list-option>
+          </mat-selection-list>
+
+          <mat-selection-list dense #categories>
+              <h3 mat-subheader>Category</h3>
+              <mat-list-option *ngFor="let category of filter.categories" [value]="category.id">
+                {{ category.category }}
+              </mat-list-option>
+          </mat-selection-list>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="spacer"></div>
+
+  <div fxLayout="column" fxLayoutAlign="start strech" fxLayoutGap="30px">
+    <app-accomodation-item
+      *ngFor="let term of terms; let i = index"
+      [term]="term"
+      [isAuthenticated]="isAuthenticated"
+      (reserve)="onReserve($event, i)">
+    </app-accomodation-item>
+  </div>
+</div>
