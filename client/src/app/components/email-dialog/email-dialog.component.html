@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Password recovery</h2>
+
+<mat-dialog-content>
+  <p>Forgot your password?</p>
+  <p>Enter your email adress and will send you mail with instructions on how to reset your password.</p>
+
+  <div [formGroup]="form" class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Email adress" formControlName="email">
+      <mat-error>Invalid email</mat-error>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button [disabled]="!form.valid" [mat-dialog-close]="form.value" mat-raised-button color="primary">Send mail</button>
+  <button mat-dialog-close mat-raised-button color="primary">Cancel</button>
+</mat-dialog-actions>
