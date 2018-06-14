@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Messages from {{user}}</h2>
+
+<mat-dialog-content>
+  <mat-chip-list class="mat-chip-list-stacked">
+    <mat-chip *ngFor="let message of messages" selected="true" [color]="message.color">
+      {{message.message}}
+    </mat-chip>
+  </mat-chip-list>
+  <br>
+  <br>
+  <div [formGroup]="form" class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Message content" formControlName="message">
+      <mat-error>Invalid message</mat-error>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button [disabled]="!form.valid"  mat-raised-button color="primary" (click)="onSendMessage()" >Send message</button>
+  <button mat-dialog-close mat-raised-button color="primary">Exit</button>
+</mat-dialog-actions>

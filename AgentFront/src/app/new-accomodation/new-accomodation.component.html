@@ -1,0 +1,112 @@
+<mat-card class="example-card">
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" style="margin-bottom: 20px">
+      <div class="example-container">
+        <mat-form-field>
+          <input type="text" matInput placeholder="Enter accomodation name" formControlName="name">
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <input type="text" matInput placeholder="Enter Country" formControlName="country">
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <input type="text" matInput placeholder="Enter City" formControlName="city">
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <input type="text" matInput placeholder="Enter Address" formControlName="address">
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+          <mat-form-field>
+              <mat-select placeholder="Choose your accomodation type" formControlName="accomodationType">
+                <mat-option *ngFor="let type of types" [value]="type.id">
+                  {{ type.type }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+            <mat-select placeholder="Choose your accomodation category" formControlName="category">
+              <mat-option *ngFor="let category of categories" [value]="category.id">
+                {{ category.category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <textarea matInput placeholder="Description" formControlName="description"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <input type="number" matInput placeholder="Capacity" formControlName="capacity">
+        </mat-form-field>
+      </div>
+      <br><br>
+      <mat-divider></mat-divider>
+      <div formArrayName="terms">
+        <h4>Your terms</h4>
+        <button mat-raised-button type="button"
+        (click)="onAddTerm()" [disabled]="!form.get('terms').valid">Add term</button>
+        <div class="form-group"
+        *ngFor="let termControl of form.get('terms').controls; let i = index">
+          <div [formGroupName]="i">
+            <mat-form-field class="term">
+              <input  matInput [matDatepicker]="pickerFrom" placeholder="From" class="form-control" formControlName="startDate">
+              <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+              <mat-datepicker #pickerFrom></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="term">
+              <input  matInput [matDatepicker]="pickerTo" placeholder="To" class="form-control" formControlName="endDate">
+              <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+              <mat-datepicker #pickerTo></mat-datepicker>
+            </mat-form-field >
+            <mat-form-field class="term">
+                <input type="number" matInput placeholder="Price" class="form-control" formControlName="price">
+            </mat-form-field>
+            <mat-form-field class="term" color="warn" appearance="outline">
+              <mat-chip-list>
+
+                <mat-chip class="form-control" color="warn" selected="true" (click)="onTermRemove(termControl,$event)">Remove</mat-chip>
+
+              </mat-chip-list>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+      <div formArrayName="additionalServices">
+        <h4>Your additional services</h4>
+        <div *ngFor="let service of services">
+
+            <mat-checkbox (change)="onServiceCheck(service.id, $event)">{{service.name}}</mat-checkbox>
+
+        </div>
+      </div>
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+      <div>
+        <h4>Your images:</h4>
+        <input type="file" multiple accept="image/*" placeholder="Upload images" (change)="onFileChanged($event)">
+      </div>
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+      <button mat-raised-button color="warn" type="submit" [disabled]="!form.valid">Add</button>
+    </form>
+
+  </mat-card-content>
+
+
+</mat-card>
+
