@@ -1,0 +1,58 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="isHandset ? 'dialog' : 'navigation'"
+    [mode]="'over'"
+    [opened]="false">
+
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+
+    <mat-nav-list>
+      <!-- Router link home -->
+      <mat-list-item routerLink="/home">
+        <mat-icon mat-list-icon color="accent">home</mat-icon>
+        <p matLine>Home</p>
+      </mat-list-item>
+
+      <!-- If user is logged in -->
+      <ng-container *ngIf="authService.loginEvent | async; else logedOut">
+        <mat-list-item routerLink="/reservations">
+          <mat-icon mat-list-icon color="accent">notifications</mat-icon>
+          <p matLine>My reservations</p>
+        </mat-list-item>
+        <mat-list-item routerLink="/change-password">
+          <mat-icon mat-list-icon color="accent">compare_arrows</mat-icon>
+          <p matLine>Change password</p>
+        </mat-list-item>
+        <mat-list-item (click)="onLogout()">
+          <mat-icon mat-list-icon color="accent">exit_to_app</mat-icon>
+          <p matLine>Logout</p>
+        </mat-list-item>
+      </ng-container>
+
+      <!-- Else show logout link -->
+      <ng-template #logedOut>
+          <mat-list-item routerLink="/login">
+            <mat-icon mat-list-icon color="accent">fingerprint</mat-icon>
+            <p matLine>Login/SignUp</p>
+          </mat-list-item>
+      </ng-template>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content style="background: white;">
+    <mat-toolbar color="primary"  class="mat-elevation-z6">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Booking XWS</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

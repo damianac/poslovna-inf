@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Messages</h2>
+
+<mat-dialog-content class="message-container" #messageContainer>
+  <mat-chip-list  class="mat-chip-list-stacked">
+    <mat-chip *ngFor="let message of messages"
+      [selected]="true"
+      [fxFlexAlign]="message.response ? 'start' : 'end'"
+      [color]="message.response ? 'warn' : 'primary'">
+        {{ message.message }}
+    </mat-chip>
+  </mat-chip-list>
+</mat-dialog-content>
+
+<mat-form-field style="width: 100%; margin-top: 10px">
+    <textarea
+      [value]="newMessage"
+      (keyup)="newMessage = $event.target.value"
+      matInput
+      placeholder="New message"
+      style="resize: none"
+      rows="5">
+    </textarea>
+</mat-form-field>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" [disabled]="newMessage.length === 0" (click)="onSend()">Send</button>
+  <button mat-dialog-close mat-raised-button color="primary">Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,51 @@
+<div class="container">
+  <h1 class="mat-h1">My reservations</h1>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element">{{ element.accomodationName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="from">
+      <th mat-header-cell *matHeaderCellDef> From </th>
+      <td mat-cell *matCellDef="let element">{{ element.from }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="to">
+      <th mat-header-cell *matHeaderCellDef> To </th>
+      <td mat-cell *matCellDef="let element">{{ element.to }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let element">{{ element.price }}
+        <span>&#36;</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+
+      <td mat-cell *matCellDef="let element; let i = index;">
+        <button mat-icon-button color="accent" matTooltip="Send message" (click)="onOpenMessages(element.id)">
+          <mat-icon>message</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" matTooltip="Rate">
+          <mat-icon>star_rate</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" matTooltip="Cancel reservations" (click)="onCancelReservation(element.id, i)">
+          <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['index', 'name', 'from', 'to', 'price', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['index', 'name', 'from', 'to', 'price', 'actions'];"></tr>
+  </table>
+</div>

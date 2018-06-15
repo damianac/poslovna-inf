@@ -1,0 +1,7 @@
+.message-container {
+  height: 60%;
+}
+
+.message-container mat-chip {
+  width: auto;
+}
