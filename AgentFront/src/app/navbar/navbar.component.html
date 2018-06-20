@@ -1,0 +1,43 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="isHandset ? 'dialog' : 'navigation'"
+    [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
+    [opened]="!(isHandset | async)!.matches">
+
+    <mat-toolbar color="warn">Menu</mat-toolbar>
+
+    <mat-nav-list>
+      <mat-list-item routerLink="/accomodations">
+        <mat-icon mat-list-icon>home</mat-icon>
+        <p matLine>Accomodations</p>
+      </mat-list-item>
+      <mat-list-item routerLink="/newaccomodation">
+        <mat-icon mat-list-icon>input</mat-icon>
+        <p matLine>Add accomodation</p>
+      </mat-list-item>
+      <mat-list-item routerLink="/terms">
+        <mat-icon mat-list-icon>menu</mat-icon>
+        <p matLine>Manage reservations</p>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content style="background: rgb(249, 249, 250);">
+    <mat-toolbar color="warn">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="(isHandset | async)!.matches">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Agent application</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
