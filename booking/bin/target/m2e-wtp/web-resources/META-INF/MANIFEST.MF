@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: booking
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Laptop
+Implementation-Vendor-Id: rs.ftn.xws
+Build-Jdk: 1.8.0_144
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/booking
+Created-By: Maven Integration for Eclipse
+
