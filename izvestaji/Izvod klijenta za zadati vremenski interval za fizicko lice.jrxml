@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Izvod klijenta za zadati vremenski interval" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21156f7d-de63-406b-9910-efcd67069f47">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="datumPocetka" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="datumZavrsetka" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="username" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     klijent.`ADRESA` AS klijent_ADRESA,
+     klijent.`EMAIL` AS klijent_EMAIL,
+     klijent.`TELEFON` AS klijent_TELEFON,
+     fizicko_lice.`IME` AS fizicko_lice_IME,
+     fizicko_lice.`JMBG` AS fizicko_lice_JMBG,
+     fizicko_lice.`PREZIME` AS fizicko_lice_PREZIME,
+     dnevnostanjeracuna.`datum` AS dnevnostanjeracuna_datum,
+     dnevnostanjeracuna.`novoStanje` AS dnevnostanjeracuna_novoStanje,
+     dnevnostanjeracuna.`prethodnoStanje` AS dnevnostanjeracuna_prethodnoStanje,
+     dnevnostanjeracuna.`prometUKorist` AS dnevnostanjeracuna_prometUKorist,
+     racun.`brojRacuna` AS racun_brojRacuna,
+     mesto.`naziv` AS mesto_naziv,
+     mesto.`postanskiBroj` AS mesto_postanskiBroj,
+     klijent.`USERNAME` AS klijent_USERNAME
+FROM
+     `klijent` klijent INNER JOIN `fizicko_lice` fizicko_lice ON klijent.`id` = fizicko_lice.`KLIJENT_ID`
+     INNER JOIN `racun` racun ON klijent.`id` = racun.`klijent_id`
+     INNER JOIN `mesto` mesto ON klijent.`mesto_id` = mesto.`id`
+     INNER JOIN `dnevnostanjeracuna` dnevnostanjeracuna ON racun.`id` = dnevnostanjeracuna.`racun_id`
+Where
+	klijent.`USERNAME` LIKE $P{username} and
+ dnevnostanjeracuna.`datum` BETWEEN $P{datumPocetka} AND $P{datumZavrsetka}]]>
+	</queryString>
+	<field name="klijent_ADRESA" class="java.lang.String"/>
+	<field name="klijent_EMAIL" class="java.lang.String"/>
+	<field name="klijent_TELEFON" class="java.lang.String"/>
+	<field name="fizicko_lice_IME" class="java.lang.String"/>
+	<field name="fizicko_lice_JMBG" class="java.lang.String"/>
+	<field name="fizicko_lice_PREZIME" class="java.lang.String"/>
+	<field name="dnevnostanjeracuna_datum" class="java.sql.Timestamp"/>
+	<field name="dnevnostanjeracuna_novoStanje" class="java.lang.Double"/>
+	<field name="dnevnostanjeracuna_prethodnoStanje" class="java.lang.Double"/>
+	<field name="dnevnostanjeracuna_prometUKorist" class="java.lang.Double"/>
+	<field name="racun_brojRacuna" class="java.lang.String"/>
+	<field name="mesto_naziv" class="java.lang.String"/>
+	<field name="mesto_postanskiBroj" class="java.lang.Integer"/>
+	<field name="klijent_USERNAME" class="java.lang.String"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="7" width="555" height="24" forecolor="#B89F7D" backcolor="#000000" uuid="1aab2504-c3e8-442f-9275-44839a52ede9"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement style="SubTitle" isPrintRepeatedValues="false" x="2" y="0" width="479" height="24" forecolor="#FFFFFF" uuid="cc6646fb-61cc-40a8-81b8-0bc67be2fddd"/>
+						<textElement>
+							<font isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Izvestaj za period"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="146" y="4" width="100" height="20" forecolor="#FFFFFF" uuid="87e77116-3c1d-4752-80d3-4f14972aa357"/>
+						<textFieldExpression><![CDATA[$P{datumPocetka}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="299" y="4" width="100" height="20" forecolor="#FFFFFF" uuid="01673a5e-2422-4202-9758-949a34e2f29c"/>
+						<textFieldExpression><![CDATA[$P{datumZavrsetka}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="264" y="2" width="20" height="20" forecolor="#FFFFFF" uuid="2493a03a-2704-4005-9372-f90c4f77f780"/>
+						<textFieldExpression><![CDATA["---"]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement positionType="Float" x="0" y="4" width="555" height="26" forecolor="#000000" uuid="a74760e0-9f11-4e16-8ded-863c374cfc7e"/>
+					<textElement>
+						<font fontName="Times New Roman" size="16" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="99" y="10" width="100" height="20" uuid="971fb6aa-366b-413a-a253-60c7966fd73c"/>
+					<textFieldExpression><![CDATA["Datum"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="199" y="10" width="100" height="20" uuid="ef83ba94-4d42-4989-bbe3-85fc69abbb3e"/>
+					<textFieldExpression><![CDATA["Novo_stanje"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="302" y="10" width="100" height="20" uuid="5699e7a0-e5e4-443b-b5cd-fe71e012cebd"/>
+					<textFieldExpression><![CDATA["Predhodno_stanje"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<image>
+				<reportElement x="456" y="0" width="99" height="132" uuid="f3610bf7-27e3-47c8-a6a5-da973466b5cd"/>
+				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="451" height="95" backcolor="#000000" uuid="b82fd7ca-3ae0-47be-8a3c-f894f513dd2e"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="d033ee80-6e51-46be-af5d-99c98df0de43"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[OneToOne Bank]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="157" y="66" width="249" height="29" uuid="d2f01fc8-76de-4514-9f0f-251076495a4b"/>
+					<textElement>
+						<font size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Izvestaj]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="451" height="32" forecolor="#000000" backcolor="#CC0000" uuid="f00f0ff2-8623-4744-a9d3-aeafca19eab4"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="307" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="c9b5d612-9142-4e44-b463-b2c8a8985fa9"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="7" width="146" height="18" forecolor="#000000" uuid="1f20c213-4e30-4ec4-a6a1-1439bd98e9d5"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Podaci o korisniku]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="116" y="6" width="100" height="20" uuid="dc3af266-db24-46ec-93cc-b9d6d8cdd998"/>
+				<textFieldExpression><![CDATA[$F{fizicko_lice_IME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="6" width="100" height="20" uuid="79077d54-b7e8-4009-a290-448051da7f6d"/>
+				<textFieldExpression><![CDATA[$F{fizicko_lice_PREZIME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="26" width="100" height="20" uuid="fa6f36c3-9da4-4eea-ab1e-b7c575eaef53"/>
+				<textFieldExpression><![CDATA[$F{klijent_ADRESA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="25" width="100" height="20" uuid="c8910c99-eb99-4b13-bbad-3b8e41c09339"/>
+				<textFieldExpression><![CDATA[$F{mesto_naziv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="25" width="100" height="20" uuid="2e3d486b-99fb-47c2-8baf-8b4cd0727330"/>
+				<textFieldExpression><![CDATA[$F{mesto_postanskiBroj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="5" width="205" height="20" uuid="864fbebf-bf46-4953-8a77-655713645caf"/>
+				<textFieldExpression><![CDATA[$F{klijent_EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="46" width="100" height="20" uuid="f23a81c9-c925-483f-b767-6ce6124aecd9"/>
+				<textFieldExpression><![CDATA[$F{racun_brojRacuna}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="51" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="bd198cc8-24ff-4d05-93e0-67bd92b91dc8"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="2" y="0" width="100" height="18" uuid="eaa684a2-ece8-4109-8ce2-f368de832c4b"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="102" y="18" width="100" height="20" uuid="6769af68-122b-49c3-a4ab-c5a1c4b4185a"/>
+				<textFieldExpression><![CDATA[$F{dnevnostanjeracuna_datum}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="202" y="18" width="100" height="20" uuid="e2c968c6-43e3-40e4-9bad-79b58f7c2835"/>
+				<textFieldExpression><![CDATA[$F{dnevnostanjeracuna_novoStanje}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="302" y="18" width="100" height="20" uuid="95126e27-42db-46e2-9224-cbaed31f22fc"/>
+				<textFieldExpression><![CDATA[$F{dnevnostanjeracuna_prethodnoStanje}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="38" width="553" height="1" uuid="632456c8-2c31-4707-94fb-02cc71212597"/>
+			</line>
+			<textField>
+				<reportElement x="-1" y="18" width="100" height="20" uuid="fec22d28-b0c2-4f01-b91d-55b82715afe3"/>
+				<textFieldExpression><![CDATA[$F{racun_brojRacuna}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="24" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="4c0120d8-d475-4eac-919d-82d7091d0e4e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="ad748959-2db7-41c9-bfac-78efa4d34075"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="e3f1db0a-9439-4789-9c5a-ee6ce154cd94"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="4afd7a1b-c332-4e79-9b57-581bdae9335f"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="3aaebdcc-2e30-4dc1-9432-627b8b40c0b3"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

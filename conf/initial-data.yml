@@ -1,0 +1,208 @@
+# Inicijalni podaci za aplikaciju, popunite po volji
+# Koristeci dole navedenu sintaksu
+
+Mesto(1):
+    naziv: Novi Sad
+    postanskiBroj: 21000
+Mesto(2):
+    naziv: Beograd
+    postanskiBroj: 11000
+Mesto(3):
+    naziv: Banja Luka
+    postanskiBroj: 78000
+
+Delatnost(1):
+    naziv: pilicar
+    sifra: 1
+
+Delatnost(2):
+    naziv: arhivator
+    sifra: 2
+
+Delatnost(3):
+    naziv: programer
+    sifra: 3
+
+Banka(1):
+    PIB: 101626723
+    adresaBanke: Bulevar Oslobodjenja 5
+    nazivBanke: PrvaBanka
+    obracunskiRacun: 16-66-99-88
+    sifraBanke: 100
+    swiftKod: SOGYRSBG
+    telefonBanke: 021777666
+    mesto: 1
+
+Banka(2):
+    PIB: 101326723
+    adresaBanke: Bulevar Evrope 52
+    nazivBanke: DrugaBanka
+    obracunskiRacun: 17-67-79-78
+    sifraBanke: 200
+    swiftKod: EROYRSBG
+    telefonBanke: 021887656
+    mesto: 2
+
+Clearing(1):
+    datumIVreme: 2015-11-17 15:30:30
+
+Clearing(2):
+    datumIVreme: 2015-12-14 15:30:30
+
+FizickoLice(1):
+    jmbg: 1606995830174
+    ime: Djordje
+    prezime: Nedovic
+    adresa: Djordja Servickog 1
+    telefon: 0654588055
+    fax: faxFax
+    email: stefan.kajkutsf@gmail.com
+    username: stek
+    password: 12345
+    mesto: 1
+
+PravnoLice(2):
+    adresa: Zmaj Jovina 3
+    telefon: 0696699630
+    fax: faxFax
+    email: cika.jova.zmaj@gmail.com
+    username: zmaj
+    password: jova
+    mesto: 2
+    naziv: Pilicarski zavod
+    pib: 163916
+    maticniBroj: 695874
+    delatnost: 2
+
+Admin(3):
+    username: admin
+    password: admin
+    adresa: Zmaj Jovina 3
+    telefon: 0696699630
+    email: cika.jova.zmaj@gmail.rs
+    fax: faxFax
+    banka: 1
+
+Racun(1):
+    brojRacuna: 200-123456-00
+    banka: 1
+    klijent: 1
+    datumOtvaranja: 2017-03-23
+
+Racun(2):
+    brojRacuna: 200-123456-01
+    banka: 2
+    klijent: 2
+    datumOtvaranja: 2017-03-27
+
+Racun(3):
+    brojRacuna: 200-123456-02
+    banka: 1
+    klijent: 1
+    datumOtvaranja: 2017-03-24
+
+GasenjeRacuna(1):
+    datumGasenja: 2017-03-23
+    prenosNaRacun: 200-123456-00
+    racun: 1
+
+DnevnoStanjeRacuna(1):
+    datum: 2017-03-29
+    prethodnoStanje: 0
+    prometUKorist: 100
+    stanje: 100
+    novoStanje: 100
+    racun: 1
+
+DnevnoStanjeRacuna(2):
+    datum: 2017-03-29
+    prethodnoStanje: 0
+    prometUKorist: 100
+    stanje: 100
+    novoStanje: 100
+    racun: 2
+    
+DnevnoStanjeRacuna(3):
+    datum: 2017-03-29
+    prethodnoStanje: 0
+    prometUKorist: 100
+    stanje: 444
+    novoStanje: 100
+    racun: 3
+    
+DnevnoStanjeRacuna(4):
+    datum: 2017-03-29
+    prethodnoStanje: 600
+    prometUKorist: 100
+    stanje: 600
+    novoStanje: 400
+    racun: 3
+
+MT10X(1):
+    datum: 2017-03-28
+    obracunskiRacun1: 200-123456-00
+    obracunskiRacun2: 200-123456-01
+    swiftKod1: SOGYRSBG
+    swiftKod2: EROYRSBG
+    ukupanIznos: 1000
+    vrstaPoruke: MT101
+    clearing: 1
+
+MT10X(2):
+    datum: 2017-03-28
+    obracunskiRacun1: 200-123456-01
+    obracunskiRacun2: 200-123456-00
+    swiftKod1: EROYRSBG
+    swiftKod2: SOGYRSBG
+    ukupanIznos: 1000
+    vrstaPoruke: MT102
+    clearing: 2
+
+Nalog(1):
+    sifraPlacanja: 221
+    datumNaloga: 2017-03-25
+    duznik: Dragan Jove Torbica
+    iznos: 1000
+    modelOdobrenja: 1
+    modelZaduzenja: 2
+    pozivNaBrojOdobrenja: 93
+    pozivNaBrojZaduzenja: 93
+    primalac: FTN
+    racunPoverioca: 200-123456-00
+    racunduznika: 200-123456-01
+    svrhaPlacanja: Maloj Milici skolarina
+    dnevnoStanjeRacuna: 1
+    mt10x: 1
+
+Nalog(2):
+    sifraPlacanja: 221
+    datumNaloga: 2017-03-25
+    duznik: Dragan Jove Torbica
+    iznos: 1000
+    modelOdobrenja: 1
+    modelZaduzenja: 2
+    pozivNaBrojOdobrenja: 93
+    pozivNaBrojZaduzenja: 93
+    primalac: FTN
+    racunPoverioca: 200-123456-01
+    racunduznika: 200-123456-00
+    svrhaPlacanja: Maloj Milici skolarina
+    dnevnoStanjeRacuna: 1
+    mt10x: 2
+    
+    
+Nalog(3):
+    sifraPlacanja: 221
+    datumNaloga: 2017-03-25
+    duznik: Dragan Jove Torbica
+    iznos: 1000
+    modelOdobrenja: 1
+    modelZaduzenja: 2
+    pozivNaBrojOdobrenja: 93
+    pozivNaBrojZaduzenja: 93
+    primalac: FTN
+    racunPoverioca: 200-123456-00
+    racunduznika: 200-123456-02
+    svrhaPlacanja: Maloj Milici skolarina
+    dnevnoStanjeRacuna: 2
+    mt10x: 2

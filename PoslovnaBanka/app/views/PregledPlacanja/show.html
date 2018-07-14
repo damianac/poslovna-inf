@@ -1,0 +1,25 @@
+#{extends 'TempViewFolder/template.html' /}
+<div id="mainTitle">PREGLED PLAĆANJA</div>
+#{form @PregledPlacanja.filter()}
+<div id="datePickerHolder">
+<div style="width:35%;float:left;padding:3%">Izaberite početni datum: <input id="pocetniDatum" type="date" multiple="false" name="pocetniDatum"></div><div style="width:30%;float:left;padding:3%">Izaberite krajnji datum: &nbsp;<input type="date" multiple="false" id="krajnjiDatum" name="krajnjiDatum"></div><button style="width:15%;" class="button" id="datePickerButton">Prikaži</button>
+</div>
+#{/form}
+<div id="izvestajHolder">
+  <table id="izvestajTable">
+      <thead>Izvestaj za račun: ${session.brojRacuna}</thead>
+      <tbody>
+      	#{if empty==false}
+      	#{list items:naloziSvi, as:'nalog'}
+          <tr #{if session.brojRacuna == nalog.racunPoverioca} #{/if} #{else} #{/else}>
+              <td>${nalog.datumNaloga}</td><td>${nalog.svrhaPlacanja}</td><td><strong>${nalog.iznos}</strong></td>
+          </tr>
+          #{/list}
+          #{/if}
+          #{else}
+          	<br/>
+          	<p><strong>Ne postoje promene za izabrani period</strong></p>
+          	#{/else}
+      </tbody>
+  </table>
+</div>

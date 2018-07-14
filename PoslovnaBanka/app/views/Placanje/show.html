@@ -1,0 +1,110 @@
+#{extends 'TempViewFolder/template.html' /}
+<div id="mainTitle">PLAĆANJE</div>
+              
+                  
+               <div id="nalogHolder">
+                   
+                      <div id="nalog">
+                      #{form @Placanje.add(), method: 'POST'}
+                       <div id="nalogL">
+                       
+                       <!--#{field 'duznik'}
+							 <label for = "${field.id}">Dužnik - nalogodavac</label>
+							 <br>
+							 <input type = "text" name = "${field.name}" id = "${field.id}" />
+						 	<span>#{error 'duznik' /}</span>
+						#{/}-->
+						   
+							   Duznik : 
+							   <br><input type="text" name="nalog.duznik" value="${flash['nalog.duznik']}" />
+							   <span class="error">#{error 'nalog.duznik' /}</span>
+						   
+                       <br>
+                        #{field 'svrhaPlacanja'}
+							 <label for = "${field.id}">Svrha plaćanja</label>
+							 <br>
+							 <input type = "text" name = "nalog.svrhaPlacanja" value = "${flash['nalog.svrhaPlacanja']}" />
+						 	<span>#{error 'svrhaPlacanja' /}</span>
+						#{/}
+                       <br>
+                        #{field 'primalac'}
+							 <label for = "${field.id}">Poverilac - primalac</label>
+							 <br>
+							 <input type = "text" name = "nalog.primalac" value = "${flash['nalog.primalac']}" />
+							<span>#{error 'primalac' /}</span>
+						#{/}
+                    
+                       </div>
+                       <div id="nalogR">
+                          #{field 'sifraPlacanja'}
+							 <label for = "${field.id}">Šifra plaćanja</label>
+							 <br>
+							 <input size="3" maxlength="3" type = "text" name = "nalog.sifraPlacanja" value = "${flash['nalog.sifraPlacanja']}" />
+							<span>#{error 'sifraPlacanja' /}</span>
+						#{/}
+                     
+                       
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="valuta" value="RSD" size="3" maxlength="3"> Valuta
+                           <br>
+                           #{field 'iznos'}
+							 <label for = "${field.id}">Iznos</label>
+							 <br>
+							 <input  type = "nu" name = "nalog.iznos" value = "${flash['nalog.iznos']}" />
+							<span>#{error 'iznos' /}</span>
+							#{/}
+                      <br>
+                       Račun dužnika - nalogodavca
+                           <br>
+                       <select name = "nalog.racunduznika" value = "${flash['nalog.racunduznika']} id="racunDropdown">
+                       	#{list items:racuni, as:'racun'}
+                           <option ">${racun.brojRacuna}</option>
+                        #{/list}
+                       </select>
+                           <br>
+                           #{field 'modelZaduzenja'}
+							 <label for = "${field.id}">Model i poziv na broj zaduženja</label>
+							 <br>
+							 <input  size="5" maxlength="5" type = "text" name = "nalog.modelZaduzenja" value = "${flash['nalog.modelZaduzenja']}" />
+							<span>#{error 'modelZaduzenja' /}</span>
+							#{/}
+
+                          #{field 'pozivNaBrojZaduzenja'}
+
+							 <input   type = "text" name = "nalog.pozivNaBrojZaduzenja" value = "${flash['nalog.pozivNaBrojZaduzenja']}" />
+							<span>#{error 'pozivNaBrojZaduzenja' /}</span>
+							#{/}
+							<br>
+                    
+                       #{field 'racunPoverioca'}
+							 <label for = "${field.id}">Račun poverioca - primaoca</label>
+							 <br>
+							 <input type = "text" name = "nalog.racunPoverioca" value = "${flash['nalog.racunPoverioca']}" />
+						 	<span>#{error 'racunPoverioca' /}</span>
+						#{/}
+                     <br>
+                           #{field 'modelOdobrenja'}
+							 <label for = "${field.id}">Model i poziv na broj odobrenja</label>
+							 <br>
+							 <input  size="5" maxlength="5" type = "nubmer" name = "nalog.modelOdobrenja" value = "${flash['nalog.modelOdobrenja']}" />
+							<span>#{error 'modelOdobrenja' /}</span>
+							#{/}
+
+                          #{field 'pozivNaBrojOdobrenja'}
+
+							 <input   type = "text" name = "nalog.pozivNaBrojOdobrenja" value = "${flash['nalog.pozivNaBrojOdobrenja']}" />
+							<span>#{error 'pozivNaBrojOdobrenja' /}</span>
+							#{/}
+							<br>
+
+							<br>                     
+
+                       		<input type="checkbox" name= "hitno"/>
+                       </div>
+                       <div id="nalogButtons">
+                           <button type="reset">PoniÅ¡ti</button>
+                            
+                           <button type="submit" value="plati">Plati</button>
+                       </div>
+                  #{/form}
+					  </div>
+			   </div>

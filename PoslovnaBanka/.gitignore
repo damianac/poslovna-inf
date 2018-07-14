@@ -1,0 +1,17 @@
+/.idea
+/lib
+/PoslovnaBanka.iml
+/PoslovnaBanka.ipr
+/tmp
+/modules
+/test-result
+/logs
+/eclipse
+/.project
+/.classpath
+/conf/application.conf
+/tmp/bytecode/*
+/modules/*
+PoslovnaBanka.iws
+.settings/
+

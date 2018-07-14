@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            targetNamespace="https://github.com/JerSefJeTu/PoslovnaBanka/mt103"
+            xmlns="https://github.com/JerSefJeTu/PoslovnaBanka/mt103"
+            xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1">
+    
+    <xsd:element name="mt103">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="duznik" type="Klijent"/>
+                <xsd:element name="poverilac" type="Klijent"/>
+                <xsd:element name="nalog" type="Nalog"/>
+                <xsd:element name="uplata" type="Uplata"/>
+            </xsd:sequence>
+            <xsd:attribute name="idPoruke" type="xsd:positiveInteger"/>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:complexType name="Uplata">
+        <xsd:sequence>
+            <xsd:element name="zaduzenje" type="ZO"/>
+            <xsd:element name="odobrenje" type="ZO"/>
+            <xsd:element name="iznos" type="xsd:integer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="ZO">
+        <xsd:sequence>
+            <xsd:element name="broj_racuna" type="Racun"/>
+            <xsd:element name="broj_modela" type="xsd:int"/>
+            <xsd:element name="poziv_na_broj">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="[0-9]+(\-[0-9]+)*"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Nalog">
+        <xsd:sequence>
+            <xsd:element name="svrha_placanja" type="xsd:string"/>
+            <xsd:element name="valuta">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="datum" type="Datum"/>
+                        <xsd:element name="sifra" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="datum" type="Datum"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="Datum">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}\."/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="Klijent">
+        <xsd:sequence>
+            <xsd:element name="banka">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="swift" type="swift"/>
+                        <xsd:element name="broj_racuna" type="Racun"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="klijent" type="TipLica">
+                <xsd:alternative test="@tip='fizicko_lice'" type="FizickoLice"/>
+                <xsd:alternative test="@tip='pravno_lice'" type="PravnoLice"/>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="swift">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="([a-z|A-Z|0-9]{11})|([a-z|A-Z|0-9]{8})"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="TipLica">
+        <xsd:attribute name="tip"/>
+    </xsd:complexType>
+    
+    <xsd:complexType name="FizickoLice">
+        <xsd:complexContent>
+            <xsd:extension base="TipLica">
+                <xsd:sequence>
+                    <xsd:element name="ime" type="xsd:string"/>
+                    <xsd:element name="prezime" type="xsd:string"/>
+                    <xsd:element name="adresa" type="Adresa"/>
+                </xsd:sequence>
+            </xsd:extension>    
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="PravnoLice">
+        <xsd:complexContent>
+            <xsd:extension base="TipLica">
+                <xsd:sequence>
+                    <xsd:element name="naziv" type="xsd:string"/>
+                    <xsd:element name="adresa" type="Adresa"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="Adresa">
+        <xsd:sequence>
+            <xsd:element name="ulica" type="xsd:string"/>
+            <xsd:element name="mesto" type="Mesto"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="KucniBroj">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[1-9][0-9]*[a-z|A-Z]?"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:complexType name="Mesto" mixed="true">
+        <xsd:attribute name="pb" type="PostanskiBroj" use="optional"/>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="PostanskiBroj">
+        <xsd:restriction base="xsd:positiveInteger">
+            <xsd:minInclusive value="10000"/>
+            <xsd:maxInclusive value="40000"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="Racun">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[1-9][0-9]{2}-[0-9]{13}-[0-9]{2}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+</xsd:schema>

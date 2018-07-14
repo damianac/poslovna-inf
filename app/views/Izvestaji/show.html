@@ -1,0 +1,62 @@
+#{extends 'TempViewFolder/template.html' /}
+<link rel="stylesheet"  type="text/css" href="@{'/public/stylesheets/modal.css'}"/>
+<script type="text/javascript" src="@{'/public/javascripts/jquery-3.1.1.min.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/modal.js'}"></script>
+
+<div>
+    <p>Izvestaji</p>
+    <button href="" id="poslednjaUplataDetaljno">Izvestaj za odredjeni period</button>
+    <button href="" id="poslednjaIsplataDetaljno">Izvestaj za banku</button>
+
+    <div id="myModalInfoUplata" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+                <form action="@{Izvestaji.report1()}">
+                    <p>
+                        #{field 'datumPocetka'}
+                        <label for = "${field.id}">Pocetni datum</label>
+                        <input type = "date" name = "${field.name}" id = "${field.id}"/>
+                        #{/}
+
+                    </p>
+                    <p>
+                        #{field 'datumZavrsetka'}
+                        <label for = "${field.id}">Zavrsni datum</label>
+                        <input type = "date" name = "${field.name}" id = "${field.id}"/>
+                        #{/}
+
+                    </p>
+
+                    <p hidden="hidden">
+                        #{field 'idKlijenta'}
+                        <input type = "text" name = "${field.name}" id = "${field.id}" value="${session.idKlijenta}"/>
+                        #{/}
+
+                    </p>
+                    <button type="submit">PRIKAZI</button>
+                </form>
+
+        </div>
+    </div>
+
+    <div id="myModalInfoIsplata" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form action="@{Izvestaji.report2()}">
+                <p>
+                    #{field 'swiftKod'}
+                    <label for = "${field.id}">Unesite swift kod</label>
+                    <input type = "text" name = "${field.name}" id = "${field.id}"/>
+                    #{/}
+
+                </p>
+                <button type="submit">PRIKAZI</button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

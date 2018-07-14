@@ -1,0 +1,115 @@
+#{extends 'standardForm.html' /}
+#{set title:'Racuni' /}
+
+<script>
+    function sync(item) {
+        brojRacuna = item.find(".brojRacuna").html();
+        id = item.find(".id").html();
+        klijent = item.find(".klijent").html();
+        datumOtvaranja = item.find(".datumOtvaranja").html();
+        $("#brojRacuna").val(brojRacuna);
+        $("#klijent").val(klijent);
+        $("#id").val(id);
+        $("#datumOtvaranja").val(datumOtvaranja);
+    }
+
+</script>
+
+<p>
+<ul>
+    <li><a href="http://localhost:9000" id= "pickup"><img src="@{'/public/images/pocetna.png'}"/></a></li>
+    <li><a href="@{RacuniAdmin.show('')}" id= "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
+    <li><a href="@{RacuniAdmin.show('filter')}" id = "search"><img src="@{'/public/images/search.gif'}"/></a></li>
+    <li><a  id= "first"><img src="@{'/public/images/first.gif'}"/></a></li>
+    <li><a  id= "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
+    <li><a  id= "next"><img src="@{'/public/images/next.gif'}"/></a></li>
+    <li><a  id= "last"><img src="@{'/public/images/last.gif'}"/></a></li>
+    <li><a href="@{RacuniAdmin.show('add')}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+    <li><a href="@{RacuniAdmin.show('remove')}" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
+</ul>
+</p>
+
+<h1>Racuni</h1>
+
+<table>
+    <tr class = "header">
+        <th>brojRacuna</th>
+        <th>klijent</th>
+        <th>datumOtvaranja</th>
+    </tr>
+    #{list items:racuni, as:'racun'}
+
+    <tr>
+        <td class = "brojRacuna">${racun.brojRacuna}</td>
+        <td class = "klijent">${racun.klijent}</td>
+        <td class = "datumOtvaranja">${racun.datumOtvaranja}</td>
+        <td style = "visibility: hidden; max-width: 0px" class = "id">${racun.id}</td>
+    </tr>
+
+    #{/list}
+</table>
+
+#{set 'action'}
+#{if mode == 'add'}
+@{RacuniAdmin.add()}
+#{/if}
+
+#{elseif mode == 'remove'}
+@{RacuniAdmin.delete()}
+#{/elseif}
+
+#{elseif mode == 'edit'}
+@{RacuniAdmin.edit()}
+#{/elseif}
+
+#{else}
+@{RacuniAdmin.edit()}
+#{/else}
+#{/set}
+
+
+
+<div class = "panel">
+    <p>
+        <form action=${action} method="post">
+            #{field 'id'}
+            <input type = "hidden" name = "${field.name}" id = "${field.id}"/>
+            #{/}
+
+
+    <p>
+        #{field 'brojRacuna'}
+        <label for = "${field.id}">brojRacuna</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'brojRacuna' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'klijent'}
+        <label for = "${field.id}">klijent</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'klijent' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'datumOtvaranja'}
+        <label for = "${field.id}">datumOtvaranja</label>
+            <input type = "text" name = "${field.name}" id = "${field.name}" />
+        <span>#{error 'datumOtvaranja' /}</span>
+        #{/}
+
+    </p>
+
+
+    <div id = "formActions">
+        <input type = "submit" value = "Potvrda" style="margin-left:6em"/>
+        <a href = "@{RacuniAdmin.show('')}" style="margin-left:1em">Rollback</a>
+    </div>
+
+    </form>
+    </p>
+</div>

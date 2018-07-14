@@ -1,0 +1,102 @@
+#{extends 'standardForm.html' /}
+#{set title:'Delatnosti' /}
+
+<script>
+    function sync(item) {
+        nazivDelatnosti = item.find(".nazivDelatnosti").html();
+        id = item.find(".id").html();
+        sifraDelatnosti = item.find(".sifraDelatnosti").html();
+        $("#sifraDelatnosti").val(sifraDelatnosti);
+        $("#nazivDelatnosti").val(nazivDelatnosti);
+        $("#id").val(id);
+    }
+
+</script>
+
+<p>
+    <ul>
+        <li><a href="http://localhost:9000" id= "pickup"><img src="@{'/public/images/pocetna.png'}"/></a></li>
+        <li><a href="@{Delatnosti.show('')}" id= "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
+        <li><a href="@{Delatnosti.show('filter')}" id = "search"><img src="@{'/public/images/search.gif'}"/></a></li>
+        <li><a  id= "first"><img src="@{'/public/images/first.gif'}"/></a></li>
+        <li><a  id= "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
+        <li><a  id= "next"><img src="@{'/public/images/next.gif'}"/></a></li>
+        <li><a  id= "last"><img src="@{'/public/images/last.gif'}"/></a></li>
+        <li><a href="@{Delatnosti.show('add')}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+        <li><a href="@{Delatnosti.show('remove')}" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
+    </ul>
+</p>
+
+<h1>Delatnosti</h1>
+
+<table>
+    <tr class = "header">
+        <th>naziv</th>
+        <th>sifraDelatnosti</th>
+    </tr>
+#{list items:delatnosti, as:'delatnost'}
+
+    <tr>
+        <td class = "nazivDelatnosti">${delatnost.naziv}</td>
+        <td class = "sifraDelatnosti">${delatnost.sifra}</td>
+        <td style = "visibility: hidden; max-width: 0px" class = "id">${delatnost.id}</td>
+    </tr>
+
+#{/list}
+</table>
+
+#{set 'action'}
+    #{if mode == 'add'}
+    @{Delatnosti.add()}
+    #{/if}
+
+    #{elseif mode == 'edit'}
+    @{Delatnosti.edit()}
+    #{/elseif}
+
+    #{elseif mode == 'remove'}
+    @{Delatnosti.delete()}
+    #{/elseif}
+
+    #{else}
+    @{Delatnosti.filter()}
+    #{/else}
+#{/set}
+
+
+
+<div class = "panel">
+    <p>
+        <form action=${action} method="post">
+        #{field 'id'}
+            <input type = "hidden" name = "${field.name}" id = "${field.id}"/>
+        #{/}
+
+
+    <p>
+    #{field 'nazivDelatnosti'}
+        <label for = "${field.id}">nazivDelatnosti</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'nazivDelatnosti' /}</span>
+    #{/}
+
+    </p>
+
+    <p>
+    #{field 'sifraDelatnosti'}
+        <label for = "${field.id}">sifraDelatnosti</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'sifraDelatnosti' /}</span>
+    #{/}
+
+    </p>
+
+
+    <div id = "formActions">
+        <input type = "submit" value = "Potvrda" style="margin-left:6em"/>
+        <a href = "@{Delatnosti.show('')}" style="margin-left:1em">Rollback</a>
+    </div>
+
+    </form>
+    </p>
+</div>

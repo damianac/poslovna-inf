@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mt103 idPoruke="1" xmlns="https://github.com/JerSefJeTu/PoslovnaBanka/mt103"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/JerSefJeTu/PoslovnaBanka/mt103 mt103.xsd">
+    <duznik>
+        <banka>
+            <swift>98765432</swift>
+            <broj_racuna>123-0000456789123-13</broj_racuna>
+        </banka>
+        <klijent tip="fizicko_lice">
+            <ime>Stefan</ime>
+            <prezime>Kajkut</prezime>
+            <adresa>
+                <ulica>Frana Supila</ulica>
+                <mesto pb="78000">Banja Luka</mesto>
+            </adresa>
+        </klijent>
+    </duznik>
+    <poverilac>
+        <banka>
+            <swift>123ABCDE</swift>
+            <broj_racuna>987-1234567890000-13</broj_racuna>
+        </banka>
+        <klijent tip="pravno_lice">
+            <naziv>FTN</naziv>
+            <adresa>
+                <ulica>Trg Dositeja Obradovica</ulica>
+                <mesto pb="21000">Novi Sad</mesto>
+            </adresa>
+        </klijent>
+    </poverilac>
+    <nalog>
+        <svrha_placanja>Uplata skolarine</svrha_placanja>
+        <valuta>
+            <datum>29.03.2015.</datum>
+            <sifra>RSD</sifra>
+        </valuta>
+        <datum>29.03.2017.</datum>
+    </nalog>
+    <uplata>
+        <zaduzenje>
+            <broj_racuna>567-1000002345566-55</broj_racuna>
+            <broj_modela>13241</broj_modela>
+            <poziv_na_broj>72187</poziv_na_broj>
+        </zaduzenje>
+        <odobrenje>
+            <broj_racuna>567-1234550000066-55</broj_racuna>
+            <broj_modela>13241</broj_modela>
+            <poziv_na_broj>72187</poziv_na_broj>
+        </odobrenje>
+        <iznos>5000</iznos>
+    </uplata>
+</mt103>

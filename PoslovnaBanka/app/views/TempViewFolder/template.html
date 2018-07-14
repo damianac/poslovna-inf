@@ -1,0 +1,33 @@
+<html>
+
+    <head>
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/templateStyle.css'}">
+
+        <title>One To One Bank</title>
+    </head>
+    <body>
+  
+        <header>
+            <div id="loginHeader">
+                <div id="loggedUser">Dobro došli, <div id="username"></div>  ${session.ime} ${session.prezime} ${session.naziv}  
+                    <a href="/secure/logout" id="logout">ODJAVA</a> 
+                </div>
+            </div>
+        </header>
+        <nav>
+            <ul>
+            
+                <li><a href="@{Racuni.show()}" id="racuni">MOJI RAČUNI</a></li>
+                <li><a href="@{Placanje.show()}" id="placanja">PLAĆANJE</a></li>
+                <li><a href="@{Izvestaji.show()}" id="izvestaji">IZVEŠTAJI</a></li>
+            </ul>
+            
+        </nav>
+        <div id="centerContent">
+           <div id="main">
+           #{doLayout/}
+  
+            </div>
+        </div>
+    </body>
+</html>

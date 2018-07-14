@@ -1,0 +1,95 @@
+<div id="mainTitle">PLAĆANJE</div>
+               <div id="neobradjeniNalozi">
+                  <div id="neobradjeniHeader">Neobrađeni nalozi</div>
+                  <ol>
+                    <li>
+                      <a href="" class="button">x</a> <a href="" class="neobradjeniNalozi">aaaa</a>
+                    </li>
+                    <li>
+                        <a href="" class="button">x</a> <a href="" class="neobradjeniNalozi">bbbb</a>    
+                    </li>
+                    <li>
+                        <a href="" class="button">x</a> <a href="" class="neobradjeniNalozi">cccc</a>
+                    </li>
+                    <li>
+                        <a href="" class="button">x</a> <a href="" class="neobradjeniNalozi">dddd</a>
+                    </li>
+                    <li>
+                       <a href="" class="button">x</a>  <a href="" class="neobradjeniNalozi">dddd</a>
+                    </li>
+                    <li>
+                       <a href="" class="button">x</a>  <a href="" class="neobradjeniNalozi">dddd</a>
+                    </li>
+                    <li>
+                       <a href="" class="button">x</a>  <a href="" class="neobradjeniNalozi">dddd</a>
+                    </li>
+                    <li>
+                       <a href="" class="button">x</a>  <a href="" class="neobradjeniNalozi">dddd</a>
+                    </li>
+                    <li>
+                       <a href="" class="button">x</a>  <a href="" class="neobradjeniNalozi">dddd</a>
+                    </li>
+                    <li>
+                       <a href="" class="button">x</a>  <a href="" class="neobradjeniNalozi">dddd</a>
+                    </li>
+                    <li>
+                       <a href="" class="button">x</a>  <a href="" class="neobradjeniNalozi">dddd</a>
+                    </li>
+                    
+                </ol>
+               </div>
+               <div id="nalogHolder">
+                   <form action="">
+                      <div id="nalog">
+                       <div id="nalogL">
+                       Dužnik - nalogodavac 
+                       <br>
+                       <input type="text" id="duznik">
+                       <br>
+                       Svrha plaćanja
+                       <br>
+                       <input type="text" id="svrhaPlacanja">
+                       <br>
+                       Poverilac - primalac
+                       <br>
+                       <input type="text" id="primalac">
+                       </div>
+                       <div id="nalogR">
+                       Šifra plaćanja&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valuta
+                       <br>
+                       <input type="text" id="sifraPlacanja" size="3" maxlength="3">
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="valuta" value="RSD" size="3" maxlength="3">
+                           <br>
+                       Iznos
+                       <br>
+                       <input type="number" min="0" id="iznos">
+                           <br>
+                       Račun dužnika - nalogodavca
+                           <br>
+                       <select id="racunDropdown">
+                           <option value="1">678-121212123-00</option>
+                           <option value="2">123-4567890123-88</option>
+                       </select>
+                           <br>
+                       Model i poziv na broj zaduženja
+                           <br>
+                       <input type="text" id="modelZaduzenja" size="5" maxlength="5">
+                       <input type="text" id="pozivNaBrojZaduzenja">
+                           <br>
+                       Račun poverioca - primaoca
+                           <br>
+                       <input type="text" id="racunPrimaoca">
+                           <br>
+                       Model i poziv na broj odobrenja
+                           <br>
+                       <input type="text" id="modelOdobrenja" size="5" maxlength="5">
+                       <input type="text" id="pozivNaBrojOdobrenja">
+                       </div>
+                       </div>
+                       <div id="nalogButtons">
+                           <button type="reset">Poništi</button>
+                            <button type="submit" value="sacuvaj">Sačuvaj</button>
+                           <button type="submit" value="plati">Plati</button>
+                       </div>
+                   </form>
+               </div>

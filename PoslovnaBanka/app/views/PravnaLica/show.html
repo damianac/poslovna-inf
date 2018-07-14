@@ -1,0 +1,186 @@
+#{extends 'standardForm.html' /}
+#{set title:'PravnaLica' /}
+
+<script>
+    function sync(item){
+        id = item.find(".id").html();
+        adresa = item.find(".adresa").html();
+        fax = item.find(".fax").html();
+        email = item.find(".email").html();
+        adresa = item.find(".adresa").html();
+        telefon = item.find(".telefon").html();
+        username = item.find(".username").html();
+        pib = item.find(".pib").html();
+        naziv = item.find(".naziv").html();
+        maticniBroj = item.find(".maticniBroj").html();
+
+
+        $("#adresa").val(adresa);
+        $("#fax").val(fax);
+        $("#id").val(id);
+        $("#email").val(email);
+        $("#adresa").val(adresa);
+        $("#telefon").val(telefon);
+        $("#username").val(username);
+        $("#pib").val(pib);
+        $("#naziv").val(naziv);
+        $("#maticniBroj").val(maticniBroj);
+    }
+    /* function nextForm(id){
+        $(location).attr('href', '/FizickaLica/filter?id=&stavkeMestoa=&datumVazenja=&postanskiBroj=&drzava=' +id);
+    } */
+
+
+</script>
+
+<p>
+<ul>
+    <li><a href="http://localhost:9000" id= "pickup"><img src="@{'/public/images/pocetna.png'}"/></a></li>
+    <li><a href="@{PravnaLica.show("")}" id= "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
+    <li><a href="@{PravnaLica.show("filter")}" id = "search"><img src="@{'/public/images/search.gif'}"/></a></li>
+    <li><a  id= "first"><img src="@{'/public/images/first.gif'}"/></a></li>
+    <li><a  id= "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
+    <li><a  id= "next"><img src="@{'/public/images/next.gif'}"/></a></li>
+    <li><a  id= "last"><img src="@{'/public/images/last.gif'}"/></a></li>
+    <li><a href="@{PravnaLica.show("add")}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+    <li><a href="@{PravnaLica.show("remove")}" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
+</ul>
+</p>
+
+<h1>PravnaLica</h1>
+
+<table>
+    <tr class = "header">
+        <th>naziv</th>
+        <th>pib</th>
+        <th>maticni broj</th>
+        <th>username</th>
+        <th>telefon</th>
+        <th>adresa</th>
+        <th>email</th>
+        <th>fax</th>
+    </tr>
+    #{list items:pravnaLica, as:'pravnoLice'}
+
+    <tr>
+        <td class = "naziv">${pravnoLice.naziv}</td>
+        <td class = "pib">${pravnoLice.pib}</td>
+        <td class = "maticniBroj">${pravnoLice.maticniBroj}</td>
+        <td class = "username">${pravnoLice.username}</td>
+        <td class = "telefon">${pravnoLice.telefon}</td>
+        <td class = "adresa">${pravnoLice.adresa}</td>
+        <td class = "email">${pravnoLice.email}</td>
+        <td class = "fax">${pravnoLice.fax}</td>
+        <td style = "visibility: hidden; max-width: 0px" class = "id">${pravnoLice.id}</td>
+    </tr>
+
+    #{/list}
+</table>
+
+#{set 'action'}
+#{if mode == 'add'}
+@{PravnaLica.add()}
+#{/if}
+
+#{elseif mode == 'edit'}
+@{PravnaLica.edit()}
+#{/elseif}
+
+#{elseif mode == 'remove'}
+@{PravnaLica.delete()}
+#{/elseif}
+
+#{else}
+@{PravnaLica.filter()}
+#{/else}
+#{/set}
+
+
+<div class = "panel">
+    <p>
+        <form action=${action} method="post">
+            #{field 'id'}
+            <input type = "hidden" name = "${field.name}" id = "${field.id}"/>
+            #{/}
+
+
+    <p>
+        #{field 'naziv'}
+        <label for = "${field.id}">naziv</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'naziv' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'pib'}
+        <label for = "${field.id}">pib</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'pib' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'maticniBroj'}
+        <label for = "${field.id}">maticniBroj</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'maticniBroj' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'username'}
+        <label for = "${field.id}">username</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'username' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'telefon'}
+        <label for = "${field.id}">telefon</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'telefon' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'adresa'}
+        <label for = "${field.id}">adresa</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'adresa' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'email'}
+        <label for = "${field.id}">email</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'email' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'fax'}
+        <label for = "${field.id}">fax</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'fax' /}</span>
+        #{/}
+
+    </p>
+
+    <div id = "formActions">
+        <input type = "submit" value = "Potvrda" style="margin-left:6em"/>
+        <a href = "@{PravnaLica.show("")}" style="margin-left:1em">Rollback</a>
+    </div>
+
+    </form>
+    </p>
+</div>

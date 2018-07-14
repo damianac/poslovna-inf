@@ -1,0 +1,179 @@
+#{extends 'TempViewFolder/template.html' /}
+<link rel="stylesheet"  type="text/css" href="@{'/public/stylesheets/modal.css'}"/>
+<script type="text/javascript" src="@{'/public/javascripts/jquery-3.1.1.min.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/modal.js'}"></script>
+<div id="mainTitle">STANJE I OSNOVNI PODACI O RAČUNU</div>
+<table id="detaljiRacuna">
+   <thead>
+       <td id="brojRacunaL">Broj računa:</td>
+       <td id="brojRacunaR">${racun.brojRacuna}</td>
+   </thead>
+   <tbody>
+       <tr>
+           <td id="vlasnikRacunaL">Vlasnik računa:</td>
+           <td id="vlasnikRacunaR"> ${session.ime} ${session.prezime} ${session.naziv} </td>
+       </tr>
+       <tr>
+           <td id="datumOtvaranjaL">Datum otvaranja računa:</td>
+           <td id="datumOtvaranjaR">${racun.datumOtvaranja}</td>
+       </tr>
+       <tr>
+           <td id="trenutnoStanjeL">Trenutno stanje:</td>
+		    #{list items:racun.dnevnoStanjeRacuna, as:'dnevnoStanjeRacuna'}
+		    #{if dnevnoStanjeRacuna_isLast == true }
+		    <td id="trenutnoStanjeR">${dnevnoStanjeRacuna.novoStanje}</td>
+			
+       </tr>
+       <tr>
+           <td id="poslednjaPromenaL">Poslednja promena:</td>
+           <td id="poslednjaPromenaR">${dnevnoStanjeRacuna.prometUKorist}</td>
+       </tr>
+       #{/if}
+			#{/list}
+			
+       <tr>
+        #{list items:naloziUKorist, as:'nalog'}
+         #{if nalog_isLast == true }
+           <td id="poslednjaUplataL">Poslednja uplata:</td>
+           <td id="poslednjaUplataR">${nalog.iznos}</td>
+            #{/if}
+			#{/list}
+       </tr>
+       <tr>
+           <td id="poslednjaIsplataL">Poslednja isplata:</td>
+       #{list items:naloziNaTeret, as:'nalog'}
+         #{if nalog_isLast == true }
+           <td id="poslednjaIsplataR">${nalog.iznos}</td>
+           #{/if}
+        #{/list}
+       </tr>
+   </tbody>
+</table>
+<div id="detailButtons">
+    <button href="" id="poslednjaUplataDetaljno">INFO</button>
+    <button href="" id="poslednjaIsplataDetaljno">INFO</button>
+</div>
+<div id="detailButtonHolder">
+   <a href="" class="button">Provera uplata</a>
+   <a href="@{PregledPlacanja.show()}" class="button">Pregled plaćanja</a>
+   <a href="" class="button">Gašenje računa</a>
+</div>
+
+
+<div id="myModalInfoUplata" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        #{list items:naloziUKorist, as:'nalog'}
+        #{if nalog_isLast == true }
+        <div id="nalogHolder">
+            <form action="">
+                <div id="nalog">
+                    <div id="nalogL">
+                        DuÅ¾nik - nalogodavac
+                        <br>
+                        <input type="text" id="duznik" value="${nalog.duznik}" readonly="readonly" >
+                        <br>
+                        Svrha plaÄ‡anja
+                        <br>
+                        <input type="text" id="svrhaPlacanja" value="${nalog.svrhaPlacanja}" readonly="readonly">
+                        <br>
+                        Poverilac - primalac
+                        <br>
+                        <input type="text" id="primalac" value="${nalog.primalac}" readonly="readonly">
+                    </div>
+                    <div id="nalogR">
+                        Å ifra plaÄ‡anja&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valuta
+                        <br>
+                        <input type="text" id="sifraPlacanja" size="3" maxlength="3" value="${nalog.sifraPlacanja}">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="valuta" value="RSD" size="3" maxlength="3">
+                        <br>
+                        Iznos
+                        <br>
+                        <input type="number" min="0" id="iznos" value="${nalog.iznos}">
+                        <br>
+                        Račun duÅ¾nika - nalogodavca
+                        <br>
+                        <input type="text" id="racunDuznika" value="${nalog.racunduznika}" readonly="readonly">
+                        <br>
+                        Model i poziv na broj zaduÅ¾enja
+                        <br>
+                        <input type="text" id="modelZaduzenja" size="5" maxlength="5" value="${nalog.modelZaduzenja}" readonly="readonly">
+                        <input type="text" id="pozivNaBrojZaduzenja" value="${nalog.pozivNaBrojZaduzenja}" readonly="readonly">
+                        <br>
+                        Račun poverioca - primaoca
+                        <br>
+                        <input type="text" id="racunPrimaoca" value="${nalog.racunPoverioca}" readonly="readonly">
+                        <br>
+                        Model i poziv na broj odobrenja
+                        <br>
+                        <input type="text" id="modelOdobrenja" size="5" maxlength="5" value="${nalog.modelOdobrenja}" readonly="readonly">
+                        <input type="text" id="pozivNaBrojOdobrenja" value="${nalog.pozivNaBrojOdobrenja}" readonly="readonly">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    #{/if}
+    #{/list}
+</div>
+
+<div id="myModalInfoIsplata" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        #{list items:naloziNaTeret, as:'nalog'}
+        #{if nalog_isLast == true }
+        <div id="nalogHolder">
+            <form action="">
+                <div id="nalog">
+                    <div id="nalogL">
+                        DuÅ¾nik - nalogodavac
+                        <br>
+                        <input type="text" id="duznik" value="${nalog.duznik}" readonly="readonly">
+                        <br>
+                        Svrha plaÄ‡anja
+                        <br>
+                        <input type="text" id="svrhaPlacanja" value="${nalog.svrhaPlacanja}" readonly="readonly">
+                        <br>
+                        Poverilac - primalac
+                        <br>
+                        <input type="text" id="primalac" value="${nalog.primalac}" readonly="readonly">
+                    </div>
+                    <div id="nalogR">
+                        Å ifra plaÄ‡anja&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valuta
+                        <br>
+                        <input type="text" id="sifraPlacanja" size="3" maxlength="3" value="${nalog.sifraPlacanja}" readonly="readonly">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="valuta" value="RSD" size="3" maxlength="3">
+                        <br>
+                        Iznos
+                        <br>
+                        <input type="number" min="0" id="iznos" value="${nalog.iznos}" readonly="readonly">
+                        <br>
+                        Račun duÅ¾nika - nalogodavca
+                        <br>
+                        <input type="text" id="racunDuznika" value="${nalog.racunduznika}" readonly="readonly">
+                        <br>
+                        Model i poziv na broj zaduÅ¾enja
+                        <br>
+                        <input type="text" id="modelZaduzenja" size="5" maxlength="5" value="${nalog.modelZaduzenja}" readonly="readonly">
+                        <input type="text" id="pozivNaBrojZaduzenja" value="${nalog.pozivNaBrojZaduzenja}" readonly="readonly">
+                        <br>
+                        Račun poverioca - primaoca
+                        <br>
+                        <input type="text" id="racunPrimaoca" value="${nalog.racunPoverioca}" readonly="readonly">
+                        <br>
+                        Model i poziv na broj odobrenja
+                        <br>
+                        <input type="text" id="modelOdobrenja" size="5" maxlength="5" value="${nalog.modelOdobrenja}" readonly="readonly">
+                        <input type="text" id="pozivNaBrojOdobrenja" value="${nalog.pozivNaBrojOdobrenja}" readonly="readonly">
+                    </div>
+                </div>
+
+            </form>
+            #{/if}
+            #{/list}
+        </div>
+    </div>
+
+</div>

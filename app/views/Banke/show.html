@@ -1,0 +1,162 @@
+#{extends 'standardForm.html' /}
+#{set title:'Banke' /}
+<script>
+    function sync(item){
+        id = item.find(".id").html();
+        sifraBanke = item.find(".sifraBanke").html();
+        nazivBanke = item.find(".nazivBanke").html();
+        adresaBanke = item.find(".adresaBanke").html();
+        telefonBanke = item.find(".telefonBanke").html();
+        PIB = item.find(".PIB").html();
+        swiftKod = item.find(".swiftKod").html();
+        obracunskiRacun = item.find(".obracunskiRacun").html();
+        mesto = item.find(".mesto").html();
+        $("#sifraBanke").val(sifraBanke);
+        $("#nazivBanke").val(nazivBanke);
+        $("#adresaBanke").val(adresaBanke);
+        $("#telefonBanke").val(telefonBanke);
+        $("#PIB").val(PIB);
+        $("#swiftKod").val(swiftKod);
+        $("#obracunskiRacun").val(obracunskiRacun);
+        $("#mesto").val(mesto);
+        $("#id").val(id);
+    }
+</script>
+
+<p>
+<ul>
+    <li><a href="http://localhost:9000" id= "pickup"><img src="@{'/public/images/pocetna.png'}"/></a></li>
+    <li><a href="@{Banke.show("")}" id= "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
+    <li><a href="@{Banke.show("filter")}" id = "search"><img src="@{'/public/images/search.gif'}"/></a></li>
+    <li><a  id= "first"><img src="@{'/public/images/first.gif'}"/></a></li>
+    <li><a  id= "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
+    <li><a  id= "next"><img src="@{'/public/images/next.gif'}"/></a></li>
+    <li><a  id= "last"><img src="@{'/public/images/last.gif'}"/></a></li>
+    <li><a href="@{Banke.show("add")}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+    <li><a href="@{Banke.show("remove")}" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
+</ul>
+</p>
+
+<h1>Banke</h1>
+<table>
+<tr class = "header">
+    <th>sifraBanke</th>
+    <th>nazivBanke</th>
+    <th>adresaBanke</th>
+    <th>telefonBanke</th>
+    <th>PIB</th>
+    <th>swiftKod</th>
+    <th>obracunskiRacun</th>
+</tr>
+#{list items:banke, as:'banka'}
+
+<tr>
+    <td class = "sifraBanke">${banka.sifraBanke}</td>
+    <td class = "nazivBanke">${banka.nazivBanke}</td>
+    <td class = "adresaBanke">${banka.adresaBanke}</td>
+    <td class = "telefonBanke">${banka.telefonBanke}</td>
+    <td class = "PIB">${banka.PIB}</td>
+    <td class = "swiftKod">${banka.swiftKod}</td>
+    <td class = "obracunskiRacun">${banka.obracunskiRacun}</td>
+    <td style = "visibility: hidden; max-width: 0px" class = "id">${banka.id}</td>
+</tr>
+
+#{/list}
+</table>
+#{set 'action'}
+#{if mode == 'add'}
+@{Banke.add()}
+#{/if}
+
+#{elseif mode == 'edit'}
+@{Banke.edit()}
+#{/elseif}
+
+#{elseif mode == 'remove'}
+@{Banke.delete()}
+#{/elseif}
+
+#{else}
+@{Banke.filter()}
+#{/else}
+#{/set}
+
+
+
+<div class = "panel">
+    <p>
+        <form action=${action} method="post">
+            #{field 'id'}
+            <input type = "hidden" name = "${field.name}" id = "${field.id}"/>
+            #{/}
+
+
+    <p>
+        #{field 'sifraBanke'}
+        <label for = "${field.id}">sifraBanke</label>
+        <input type = "number" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'sifraBanke' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'nazivBanke'}
+        <label for = "${field.id}">nazivBanke</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'nazivBanke' /}</span>
+        #{/}
+
+    </p>
+    <p>
+        #{field 'adresaBanke'}
+        <label for = "${field.id}">adresaBanke</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'adresaBanke' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'telefonBanke'}
+        <label for = "${field.id}">telefonBanke</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'telefonBanke' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'PIB'}
+        <label for = "${field.id}">PIB</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'PIB' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'swiftKod'}
+        <label for = "${field.id}">swiftKod</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'swiftKod' /}</span>
+        #{/}
+
+    </p>
+    <p>
+        #{field 'obracunskiRacun'}
+        <label for = "${field.id}">obracunskiRacun</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'obracunskiRacun' /}</span>
+        #{/}
+
+    </p>
+
+    <div id = "formActions">
+        <input type = "submit" value = "Potvrda" style="margin-left:6em"/>
+        <a href = "@{Banke.show("")}" style="margin-left:1em">Rollback</a>
+    </div>
+
+    </form>
+    </p>
+</div>

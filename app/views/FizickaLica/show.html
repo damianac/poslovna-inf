@@ -1,0 +1,185 @@
+#{extends 'standardForm.html' /}
+#{set title:'FizickaLica' /}
+
+<script>
+    function sync(item){
+        id = item.find(".id").html();
+        adresa = item.find(".adresa").html();
+        fax = item.find(".fax").html();
+        email = item.find(".email").html();
+        adresa = item.find(".adresa").html();
+        telefon = item.find(".telefon").html();
+        username = item.find(".username").html();
+        ime = item.find(".ime").html();
+        jmbg = item.find(".jmbg").html();
+        prezime = item.find(".prezime").html();
+        $("#adresa").val(adresa);
+        $("#fax").val(fax);
+        $("#id").val(id);
+        $("#email").val(email);
+        $("#adresa").val(adresa);
+        $("#telefon").val(telefon);
+        $("#username").val(username);
+        $("#ime").val(ime);
+        $("#jmbg").val(jmbg);
+        $("#prezime").val(prezime);
+    }
+    /* function nextForm(id){
+        $(location).attr('href', '/FizickaLica/filter?id=&stavkeMestoa=&datumVazenja=&postanskiBroj=&drzava=' +id);
+    } */
+
+
+</script>
+
+<p>
+<ul>
+    <li><a href="http://localhost:9000" id= "pickup"><img src="@{'/public/images/pocetna.png'}"/></a></li>
+    <li><a href="@{FizickaLica.show("")}" id= "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
+    <li><a href="@{FizickaLica.show("filter")}" id = "search"><img src="@{'/public/images/search.gif'}"/></a></li>
+    <li><a  id= "first"><img src="@{'/public/images/first.gif'}"/></a></li>
+    <li><a  id= "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
+    <li><a  id= "next"><img src="@{'/public/images/next.gif'}"/></a></li>
+    <li><a  id= "last"><img src="@{'/public/images/last.gif'}"/></a></li>
+    <li><a href="@{FizickaLica.show("add")}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+    <li><a href="@{FizickaLica.show("remove")}" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
+</ul>
+</p>
+
+<h1>FizickaLica</h1>
+
+<table>
+    <tr class = "header">
+        <th>ime</th>
+        <th>prezime</th>
+        <th>jmbg</th>
+        <th>username</th>
+        <th>telefon</th>
+        <th>adresa</th>
+        <th>email</th>
+        <th>fax</th>
+    </tr>
+    #{list items:fizickaLica, as:'fizickoLice'}
+
+    <tr>
+        <td class = "ime">${fizickoLice.ime}</td>
+        <td class = "prezime">${fizickoLice.prezime}</td>
+        <td class = "jmbg">${fizickoLice.jmbg}</td>
+        <td class = "username">${fizickoLice.username}</td>
+        <td class = "telefon">${fizickoLice.telefon}</td>
+        <td class = "adresa">${fizickoLice.adresa}</td>
+        <td class = "email">${fizickoLice.email}</td>
+        <td class = "fax">${fizickoLice.fax}</td>
+        <td style = "visibility: hidden; max-width: 0px" class = "id">${fizickoLice.id}</td>
+    </tr>
+
+    #{/list}
+</table>
+
+#{set 'action'}
+#{if mode == 'add'}
+@{FizickaLica.add()}
+#{/if}
+
+#{elseif mode == 'edit'}
+@{FizickaLica.edit()}
+#{/elseif}
+
+#{elseif mode == 'remove'}
+@{FizickaLica.delete()}
+#{/elseif}
+
+#{else}
+@{FizickaLica.filter()}
+#{/else}
+#{/set}
+
+
+
+<div class = "panel">
+    <p>
+        <form action=${action} method="post">
+            #{field 'id'}
+            <input type = "hidden" name = "${field.name}" id = "${field.id}"/>
+            #{/}
+
+
+    <p>
+        #{field 'ime'}
+        <label for = "${field.id}">ime</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'ime' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'prezime'}
+        <label for = "${field.id}">prezime</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'prezime' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'jmbg'}
+        <label for = "${field.id}">jmbg</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'jmbg' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'username'}
+        <label for = "${field.id}">username</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'username' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'telefon'}
+        <label for = "${field.id}">telefon</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'telefon' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'adresa'}
+        <label for = "${field.id}">adresa</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'adresa' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'email'}
+        <label for = "${field.id}">email</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'email' /}</span>
+        #{/}
+
+    </p>
+
+    <p>
+        #{field 'fax'}
+        <label for = "${field.id}">fax</label>
+        <input type = "text" name = "${field.name}" id = "${field.name}"/>
+        <span>#{error 'fax' /}</span>
+        #{/}
+
+    </p>
+
+    <div id = "formActions">
+        <input type = "submit" value = "Potvrda" style="margin-left:6em"/>
+        <a href = "@{FizickaLica.show("")}" style="margin-left:1em">Rollback</a>
+    </div>
+
+    </form>
+    </p>
+</div>

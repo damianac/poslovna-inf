@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mt102 idPoruke="1" xmlns="https://github.com/JerSefJeTu/PoslovnaBanka/mt102"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://github.com/JerSefJeTu/PoslovnaBanka/mt102 mt102.xsd">
+    <zaglavlje>
+        <banka_duznik>
+            <swift>12345678</swift>
+            <broj_racuna>123-1313100000000-51</broj_racuna>
+        </banka_duznik>
+        <banka_poverilac>
+            <swift>2131BCED123</swift>
+            <broj_racuna>922-2100000000031-51</broj_racuna>
+        </banka_poverilac>
+        <ukupan_iznos>15000</ukupan_iznos>
+        <valuta>
+            <datum>23.09.2015.</datum>
+            <sifra>RSD</sifra>
+        </valuta>
+        <datum>29.03.2017.</datum>
+    </zaglavlje>
+    <lista_naloga>
+        <nalog idNaloga="1">
+            <duznik tip="fizicko_lice">
+                <ime>Stefan</ime>
+                <prezime>Kajkut</prezime>
+                <adresa>
+                    <ulica>Frana Supila</ulica>
+                    <mesto pb="78000">Banja Luka</mesto>
+                </adresa>
+            </duznik>
+            <poverilac tip="pravno_lice">
+                <naziv>Fakultet tehnickih nauka</naziv>
+                <adresa>
+                    <ulica>Trg Dositeja Obradovica</ulica>
+                    <mesto pb="21000">Novi Sad</mesto>
+                </adresa>
+            </poverilac>
+            <podaci_nalog>
+                <svrha_placanja>Prijava ispita</svrha_placanja>
+                <datum>29.03.2017.</datum>
+                <sifra_valute>RSD</sifra_valute>
+            </podaci_nalog>
+            <uplata>
+                <zaduzenje>
+                    <broj_racuna>567-1234556600000-55</broj_racuna>
+                    <broj_modela>13241</broj_modela>
+                    <poziv_na_broj>72187</poziv_na_broj>
+                </zaduzenje>
+                <odobrenje>
+                    <broj_racuna>567-1234556600000-55</broj_racuna>
+                    <broj_modela>13241</broj_modela>
+                    <poziv_na_broj>72187</poziv_na_broj>
+                </odobrenje>
+                <iznos>5000</iznos>
+            </uplata>
+        </nalog>
+        <nalog idNaloga="2">
+            <duznik tip="fizicko_lice">
+                <ime>Stefan</ime>
+                <prezime>Kajkut</prezime>
+                <adresa>
+                    <ulica>Djordja Servickog</ulica>
+                    <mesto pb="21000">Novi Sad</mesto>
+                </adresa>
+            </duznik>
+            <poverilac tip="pravno_lice">
+                <naziv>Fakultet tehnickih nauka</naziv>
+                <adresa>
+                    <ulica>Trg Dositeja Obradovica</ulica>
+                    <mesto pb="21000">Novi Sad</mesto>
+                </adresa>
+            </poverilac>
+            <podaci_nalog>
+                <svrha_placanja>Upis godine</svrha_placanja>
+                <datum>29.03.2017.</datum>
+                <sifra_valute>RSD</sifra_valute>
+            </podaci_nalog>
+            <uplata>
+                <zaduzenje>
+                    <broj_racuna>567-1234556600000-55</broj_racuna>
+                    <broj_modela>13241</broj_modela>
+                    <poziv_na_broj>72187</poziv_na_broj>
+                </zaduzenje>
+                <odobrenje>
+                    <broj_racuna>567-1234556600000-55</broj_racuna>
+                    <broj_modela>13241</broj_modela>
+                    <poziv_na_broj>72187</poziv_na_broj>
+                </odobrenje>
+                <iznos>5000</iznos>
+            </uplata>
+        </nalog>
+    </lista_naloga>
+</mt102>
